@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { A } from 'hookrouter'
 import Button from '../Button/Button'
 import Topbar from '../Topbar/Topbar'
@@ -17,11 +17,21 @@ const movieIcon = <FontAwesomeIcon icon={faVideo} />
 const gamesIcon = <FontAwesomeIcon icon={faGamepad} />
 
 function Homepage() {
+  const [playerName, setPlayerName] = useState('PLAYER')
   return(
     <div>
       <div className='homepage_wrapper'>
-        {/* <h1>This is a HOMEPAGE</h1> */}
-        <Topbar />
+        {/* TopBar Component */}
+        {/* <Topbar /> */}
+
+        {/* Header message */}
+        <div className='header'>
+          Welcome 
+          <span className='playerName' onClick={() => setPlayerName('123')}>{playerName}</span>
+          <hr className='separator' />
+        </div>
+
+        {/* Buttons */}
         <p><A href='/categories'>
           <Button label='New Game' styling='menuButton' icon={playIcon} /></A>
         </p>
@@ -31,7 +41,14 @@ function Homepage() {
         <p><A href='/statistics'>
           <Button label='Statistics' styling='menuButton' icon={statisticsIcon} /></A>
         </p>
-        <p><A href='/question'>
+      </div>
+    </div>
+  )
+}
+
+export default Homepage
+
+{/* <p><A href='/question'>
           <Button label='Back' styling='redButton' icon={backIcon} /></A>
         </p>
         <p><A href='/answer'>
@@ -42,10 +59,4 @@ function Homepage() {
         </p>
         <p><A href='/endgame'>
           <Button label='Games' styling='categoryButton' icon={gamesIcon} /></A>
-        </p>
-      </div>
-    </div>
-  )
-}
-
-export default Homepage
+        </p> */}
