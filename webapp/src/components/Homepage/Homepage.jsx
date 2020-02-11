@@ -1,6 +1,7 @@
 import React from 'react'
 import { A } from 'hookrouter'
 import Button from '../Button/Button'
+import Topbar from '../Topbar/Topbar'
 import './Homepage.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faTrophy, faChartLine } from '@fortawesome/free-solid-svg-icons'
@@ -18,8 +19,9 @@ const gamesIcon = <FontAwesomeIcon icon={faGamepad} />
 function Homepage() {
   return(
     <div>
-      <div className='wrapper'>
-        <h1>This is a HOMEPAGE</h1>
+      <div className='homepage_wrapper'>
+        {/* <h1>This is a HOMEPAGE</h1> */}
+        <Topbar />
         <p><A href='/categories'>
           <Button label='New Game' styling='menuButton' icon={playIcon} /></A>
         </p>
