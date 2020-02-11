@@ -1,5 +1,16 @@
-.wrapper {
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap');
+
+:root {
+  font-family: 'Roboto Slab', serif;
+}
+
+.homepage_wrapper {
   display: flex;
   align-items: center;
+  margin: auto;
   flex-direction: column;
+  width: 320px;
+  height: 812px;
+  border: 1px solid #000;
+  background: #364860;
 }
