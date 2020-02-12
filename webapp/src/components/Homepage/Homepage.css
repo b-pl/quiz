@@ -10,7 +10,24 @@
   margin: auto;
   flex-direction: column;
   width: 320px;
-  height: 812px;
+  height: 654px;
   border: 1px solid #000;
   background: #364860;
+  justify-content: center;
+}
+
+.header {
+  font-size: 40pt;
+  color: #FFF;
+  display: inline-block;
+  text-align: center;
+}
+
+.playerName {
+  display: inline-block;
+}
+
+.separator {
+  width: 280px;
+  color: #707070;
 }
