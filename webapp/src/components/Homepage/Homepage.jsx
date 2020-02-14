@@ -25,22 +25,19 @@ function Homepage() {
         {/* <Topbar /> */}
 
         {/* Header message */}
-        <div className='header'>
+        <div data-testid='header' className='header'>
           Welcome 
           <span className='playerName' onClick={() => setPlayerName('123')}>{playerName}</span>
           <hr className='separator' />
         </div>
 
         {/* Buttons */}
-        <p><A href='/categories'>
+        <A href='/categories'>
           <Button label='New Game' styling='menuButton' icon={playIcon} /></A>
-        </p>
-        <p><A href='/highscores'>
+        <A href='/highscores'>
           <Button label='Highscores' styling='menuButton' icon={highscoresIcon} /></A>
-        </p>
-        <p><A href='/statistics'>
+        <A href='/statistics'>
           <Button label='Statistics' styling='menuButton' icon={statisticsIcon} /></A>
-        </p>
       </div>
     </div>
   )
