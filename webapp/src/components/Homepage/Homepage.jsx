@@ -1,62 +1,66 @@
 import React, { useState } from 'react'
 import { A } from 'hookrouter'
 import Button from '../Button/Button'
-import Topbar from '../Topbar/Topbar'
+// import Topbar from '../Topbar/Topbar'
 import './Homepage.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faTrophy, faChartLine } from '@fortawesome/free-solid-svg-icons'
-import { faArrowAltCircleLeft, faRedoAlt } from '@fortawesome/free-solid-svg-icons'
-import { faVideo, faGamepad } from '@fortawesome/free-solid-svg-icons'
+// import { faArrowAltCircleLeft, faRedoAlt } from '@fortawesome/free-solid-svg-icons'
+// import { faVideo, faGamepad } from '@fortawesome/free-solid-svg-icons'
 
 const playIcon = <FontAwesomeIcon icon={faPlay} />
 const highscoresIcon = <FontAwesomeIcon icon={faTrophy} />
 const statisticsIcon = <FontAwesomeIcon icon={faChartLine} />
-const backIcon = <FontAwesomeIcon icon={faArrowAltCircleLeft} />
-const againIcon = <FontAwesomeIcon icon={faRedoAlt} />
-const movieIcon = <FontAwesomeIcon icon={faVideo} />
-const gamesIcon = <FontAwesomeIcon icon={faGamepad} />
+// const backIcon = <FontAwesomeIcon icon={faArrowAltCircleLeft} />
+// const againIcon = <FontAwesomeIcon icon={faRedoAlt} />
+// const movieIcon = <FontAwesomeIcon icon={faVideo} />
+// const gamesIcon = <FontAwesomeIcon icon={faGamepad} />
 
 function Homepage() {
+  // HOOKS
   const [playerName, setPlayerName] = useState('PLAYER')
+
+  const validatePlayerName = () => {
+    const playerName = document.querySelector('.playerName').value
+
+    if (playerName.length >= 2 && !(/\W/.test(playerName))) {
+      return document.querySelector('#newGame').disabled = false
+    } else {
+      setTimeout(() => document.querySelector('.playerName').focus(), 1)
+      document.querySelector('#newGame').disabled = true
+      alert('Name must contain 2-8 characters (only alphanumeric symbols)')
+    }
+  }
+
+  const handleInputChange = (e) => {
+    const target = e.target
+    const value = target.value
+
+    setPlayerName(value)
+  }
+
   return(
     <div>
       <div className='homepage_wrapper'>
-        {/* TopBar Component */}
-        {/* <Topbar /> */}
-
         {/* Header message */}
         <div className='header'>
-          Welcome 
-          <span className='playerName' onClick={() => setPlayerName('123')}>{playerName}</span>
+          Welcome
+          <input className='playerName' type='text' maxLength='8'
+            onChange={handleInputChange} onBlur={validatePlayerName} value={playerName}/>
+
           <hr className='separator' />
         </div>
-
+        
         {/* Buttons */}
-        <p><A href='/categories'>
-          <Button label='New Game' styling='menuButton' icon={playIcon} /></A>
-        </p>
-        <p><A href='/highscores'>
+        <A href='/categories'>
+          <Button label='New Game' styling='menuButton' id='newGame' icon={playIcon} /></A>
+        <A href='/highscores'>
           <Button label='Highscores' styling='menuButton' icon={highscoresIcon} /></A>
-        </p>
-        <p><A href='/statistics'>
+        <A href='/statistics'>
           <Button label='Statistics' styling='menuButton' icon={statisticsIcon} /></A>
-        </p>
       </div>
     </div>
   )
 }
 
 export default Homepage
-
-{/* <p><A href='/question'>
-          <Button label='Back' styling='redButton' icon={backIcon} /></A>
-        </p>
-        <p><A href='/answer'>
-          <Button label='Again' styling='greenButton' icon={againIcon} /></A>
-        </p>
-        <p><A href='/endgame'>
-          <Button label='Movies' styling='categoryButton' icon={movieIcon} /></A>
-        </p>
-        <p><A href='/endgame'>
-          <Button label='Games' styling='categoryButton' icon={gamesIcon} /></A>
-        </p> */}

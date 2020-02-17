@@ -16,6 +16,17 @@
   justify-content: center;
 }
 
+.playerName {
+  margin: auto;
+  display: block;
+  font-size: 26pt;
+  border: 0;
+  background: #364860;
+  width: 90%;
+  text-align: center;
+  color: #FFF;
+}
+
 .header {
   font-size: 40pt;
   color: #FFF;
@@ -23,11 +34,8 @@
   text-align: center;
 }
 
-.playerName {
-  display: inline-block;
-}
-
 .separator {
+  display: block;
   width: 280px;
   color: #707070;
 }
