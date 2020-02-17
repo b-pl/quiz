@@ -33,6 +33,7 @@ button:active {
   height: 85px;
   color: #F7FBFF;
   font-size: 30pt;
+  margin: 16px 0 16px 0;
 }
 
 .redButton {
