@@ -27,6 +27,10 @@
   color: #FFF;
 }
 
+.playerName:focus {
+  outline: none;
+}
+
 .header {
   font-size: 40pt;
   color: #FFF;

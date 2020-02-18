@@ -3,9 +3,15 @@ import { A } from 'hookrouter'
 import Button from '../Button/Button'
 import './Categories.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlay } from '@fortawesome/free-solid-svg-icons'
-const playIcon = <FontAwesomeIcon icon={faPlay} />
+import { faFilm, faGamepad, faMusic } from '@fortawesome/free-solid-svg-icons'
+import { faGrinSquintTears, faQuestion, faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons'
 
+const movieIcon = <FontAwesomeIcon icon={faFilm} />
+const gamepadIcon = <FontAwesomeIcon icon={faGamepad} />
+const musicIcon = <FontAwesomeIcon icon={faMusic} />
+const memesIcon = <FontAwesomeIcon icon={faGrinSquintTears} />
+const backIcon = <FontAwesomeIcon icon={faArrowAltCircleLeft} />
+const questionMark = <FontAwesomeIcon icon={faQuestion} />
 
 function Categories() {
   return(
@@ -17,19 +23,20 @@ function Categories() {
           <hr className='separator' />
         </div>
         <A href='/categories'>
-          <Button label='Category 1' styling='categoryButton' icon={playIcon} /></A>
+          <Button label='Movies' styling='categoryButton' icon={movieIcon} /></A>
         <A href='/categories'>
-          <Button label='Category 2' styling='categoryButton' icon={playIcon} /></A>
+          <Button label='Games' styling='categoryButton' icon={gamepadIcon} /></A>
         <A href='/categories'>
-          <Button label='Category 3' styling='categoryButton' icon={playIcon} /></A>
+          <Button label='Music' styling='categoryButton' icon={musicIcon} /></A>
         <A href='/categories'>
-          <Button label='Category 4' styling='categoryButton' icon={playIcon} /></A>
+          <Button label='Memes' styling='categoryButton' icon={memesIcon} /></A>
         <A href='/categories'>
-          <Button label='Category 5' styling='categoryButton' icon={playIcon} /></A>
+          <Button label='...' styling='categoryButton' icon={questionMark} /></A>
         <A href='/categories'>
-          <Button label='Cat 6' styling='categoryButton' icon={playIcon} /></A>
+          <Button label='...' styling='categoryButton' icon={questionMark} /></A>
+          
         <A href='/'>
-          <Button label='Back' styling='redButton' icon={playIcon} /></A>
+          <Button label='Back' styling='redButton' icon={backIcon} /></A>
       </div>
     </div>
   )
