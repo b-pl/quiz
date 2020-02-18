@@ -4,7 +4,7 @@
   font-family: 'Roboto Slab', serif;
 }
 
-.homepage_wrapper {
+.categories_wrapper {
   display: flex;
   align-items: center;
   margin: auto;
@@ -16,30 +16,9 @@
   justify-content: center;
 }
 
-.playerName {
-  margin: auto;
-  display: block;
-  font-size: 26pt;
-  border: 0;
-  background: #364860;
-  width: 90%;
-  text-align: center;
-  color: #FFF;
-}
-
-.playerName:focus {
-  outline: none;
-}
-
 .header {
   font-size: 40pt;
   color: #FFF;
   display: inline-block;
   text-align: center;
-}
-
-.separator {
-  display: block;
-  width: 280px;
-  color: #707070;
 }

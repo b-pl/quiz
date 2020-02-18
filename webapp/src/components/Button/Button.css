@@ -43,6 +43,7 @@ button:active {
   box-shadow: 0 4px 6px #ff0000;
   color: #ff0000;
   font-size: 18pt;
+  margin: 24px 0 0 0;
 }
 
 .redButton .label {
@@ -67,4 +68,5 @@ button:active {
   height: 40px;
   color: #E1E5E9;
   font-size: 20pt;
+  margin: 8px 0 8px 0;
 }

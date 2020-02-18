@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { A } from 'hookrouter'
 import Button from '../Button/Button'
 // import Topbar from '../Topbar/Topbar'
@@ -18,7 +18,7 @@ const statisticsIcon = <FontAwesomeIcon icon={faChartLine} />
 
 function Homepage() {
   // HOOKS
-  const [playerName, setPlayerName] = useState('PLAYER')
+  const [playerName, setPlayerName] = useState('')
 
   const validatePlayerName = () => {
     const playerName = document.querySelector('.playerName').value
@@ -27,8 +27,8 @@ function Homepage() {
       return document.querySelector('#newGame').disabled = false
     } else {
       setTimeout(() => document.querySelector('.playerName').focus(), 1)
-      document.querySelector('#newGame').disabled = true
       alert('Name must contain 2-8 characters (only alphanumeric symbols)')
+      return document.querySelector('#newGame').disabled = true
     }
   }
 
@@ -37,7 +37,17 @@ function Homepage() {
     const value = target.value
 
     setPlayerName(value)
+    localStorage.setItem('playerName', value)
   }
+
+  // Component did mount...
+  useEffect(() => {
+    if (localStorage.getItem('playerName')) {
+      setPlayerName(localStorage.getItem('playerName'))
+    } else {
+      setPlayerName('PLAYER')
+    }
+  }, [])
 
   return(
     <div>
