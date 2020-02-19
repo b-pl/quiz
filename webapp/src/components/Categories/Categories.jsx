@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilm, faGamepad, faMusic } from '@fortawesome/free-solid-svg-icons'
 import { faGrinSquintTears, faQuestion, faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons'
 
+// Icons for buttons
 const movieIcon = <FontAwesomeIcon icon={faFilm} />
 const gamepadIcon = <FontAwesomeIcon icon={faGamepad} />
 const musicIcon = <FontAwesomeIcon icon={faMusic} />
@@ -22,7 +23,7 @@ function Categories() {
   
           <hr className='separator' />
         </div>
-        <A href='/categories'>
+        <A href='/question'>
           <Button label='Movies' styling='categoryButton' icon={movieIcon} /></A>
         <A href='/categories'>
           <Button label='Games' styling='categoryButton' icon={gamepadIcon} /></A>
