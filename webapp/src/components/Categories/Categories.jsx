@@ -25,7 +25,7 @@ function Categories() {
         </div>
         <A href='/question'>
           <Button label='Movies' styling='categoryButton' icon={movieIcon} /></A>
-        <A href='/categories'>
+        <A href='/question'>
           <Button label='Games' styling='categoryButton' icon={gamepadIcon} /></A>
         <A href='/categories'>
           <Button label='Music' styling='categoryButton' icon={musicIcon} /></A>

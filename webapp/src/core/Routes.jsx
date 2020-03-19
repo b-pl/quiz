@@ -6,6 +6,7 @@ import Categories from '../components/Categories/Categories'
 import Question from '../components/Question/Question'
 import Answer from '../components/Answer/Answer'
 import Endgame from '../components/Endgame/Endgame'
+import Topbar from '../components/Topbar/Topbar'
 
 const routes = {
   '/': () => <Homepage />,
@@ -14,7 +15,8 @@ const routes = {
   '/categories': () => <Categories />,
   '/question': () => <Question />,
   '/answer': () => <Answer />,
-  '/endgame': () => <Endgame />
+  '/endgame': () => <Endgame />,
+  '/topbar': () => <Topbar />
 }
 
 export default routes
