@@ -27,9 +27,9 @@ function Endgame() {
         </div>
         <div className='btnFooter'>
           <A href='/categories'>
-            <Button label='Again' styling='greenButton smaller' /></A>
+            <Button label='Again' styling='greenButton smaller' icon='none' /></A>
           <A href='/'>  
-            <Button label='Menu' styling='redButton smaller' /></A>
+            <Button label='Menu' styling='redButton smaller' icon='none' /></A>
         </div>
       </div>
     </div>

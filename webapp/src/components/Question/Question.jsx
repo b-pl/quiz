@@ -77,7 +77,12 @@ function Question() {
     
     // Map arr to put answers into buttons labels
     return arr && arr.map(x => (
-      <Button key={arr.indexOf(x)} id={arr.indexOf(x)} label={x} styling='menuButton' onClick={handleClick} />
+      <Button key={arr.indexOf(x)}
+              id={arr.indexOf(x)}
+              label={x}
+              styling='menuButton'
+              onClick={handleClick}
+              icon='none' />
     ))
   }
 
