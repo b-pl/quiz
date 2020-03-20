@@ -27,6 +27,7 @@ function Question() {
   const [counter, setCounter] = useState(0)
   const [score, setScore] = useState(0)
   const [multiplier, setMultiplier] = useState(1)
+  const [correctAnswers, setCorrectAnswers] = useState(0)
   const CORRECT_ANSWER_POINTS = 5000
   let timeBonus
   let stopwatch
@@ -47,6 +48,9 @@ function Question() {
 
     // Update score
     setScore(prevScore => prevScore + totalScore)
+
+    // Increment correctAnswers counter
+    setCorrectAnswers(prevCorrectAnswers => prevCorrectAnswers + 1)
   }
 
   const handleClick = (e) => {
@@ -73,7 +77,12 @@ function Question() {
     
     // Map arr to put answers into buttons labels
     return arr && arr.map(x => (
-      <Button key={arr.indexOf(x)} id={arr.indexOf(x)} label={x} styling='menuButton' onClick={handleClick} />
+      <Button key={arr.indexOf(x)}
+              id={arr.indexOf(x)}
+              label={x}
+              styling='menuButton'
+              onClick={handleClick}
+              icon='none' />
     ))
   }
 
@@ -87,6 +96,8 @@ function Question() {
   const updateAndRedirect = () => {
     // Update localStorage w/ new score
     localStorage.setItem('score', score)
+    // Update localStorage w/ number of correct answers
+    localStorage.setItem('correctAnswers', correctAnswers)
     // Redirect
     if (counter > 3) return navigate('/endgame', true)
   }

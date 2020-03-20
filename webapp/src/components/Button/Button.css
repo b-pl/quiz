@@ -70,3 +70,16 @@ button:active {
   font-size: 20pt;
   margin: 8px 0 8px 0;
 }
+
+.smaller {
+  width: 100px;
+  margin: 0;
+}
+
+.smaller .label {
+  width: 60px;
+}
+
+.smaller .icon {
+  font-size: 14pt;
+}
