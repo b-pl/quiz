@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { navigate } from 'hookrouter'
 import Button from '../Button/Button'
 import './Question.css'
@@ -99,8 +99,27 @@ function Question() {
     // Update localStorage w/ number of correct answers
     localStorage.setItem('correctAnswers', correctAnswers)
     // Redirect
-    if (counter > 3) return navigate('/endgame', true)
+    if (counter > 3){
+      // Update localStorage
+      localStorage.setItem('correctAnswers', correctAnswers)
+      localStorage.setItem('wrongAnswers', 10 - correctAnswers)
+      let totalScore = localStorage.getItem('totalScore')
+      let newTotal = Number(totalScore) + score
+      localStorage.setItem('totalScore', newTotal)
+      (score > localStorage.getItem('bestScore') ? localStorage.setItem('bestScore', score) : null)
+      (localStorage.getItem('worstScore') === 0 ? localStorage.setItem('worstScore', score) : null)
+      (score < localStorage.getItem('worstScore') ? localStorage.setItem('worstScore', score) : null)
+
+      // Navigate to endGame component
+      return navigate('/endgame', true)
+    }
   }
+
+  // ComponentDidMount
+  useEffect(() => {
+    let totalPlayed = localStorage.getItem('totalPlayed')
+    localStorage.setItem('totalPlayed', ++totalPlayed)
+  }, [])
 
   return(
     <div>
