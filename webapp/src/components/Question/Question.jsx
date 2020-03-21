@@ -93,6 +93,38 @@ function Question() {
     stopwatch = setInterval(() => {timeBonus -= 1; }, 1)
   }
 
+  const updateLocalStorage = () => {
+    // Get totalScore and add current score
+    let totalScore = localStorage.getItem('totalScore')
+    let newScoreTotal = Number(totalScore) + score
+
+    // Get bestScore & worstScore
+    let bestScore = localStorage.getItem('bestScore')
+    let worstScore = localStorage.getItem('worstScore')
+
+    // Get total of correct answers
+    let correctTotal = localStorage.getItem('correctTotal')
+    let newCorrectTotal = Number(correctTotal) + correctAnswers
+
+    // Get total of wrong answers
+    let wrongTotal = localStorage.getItem('wrongTotal')
+    let newWrongTotal = Number(wrongTotal) + (10 - correctAnswers)
+
+    // Actually update stats
+    localStorage.setItem('correctAnswers', correctAnswers)
+    localStorage.setItem('wrongAnswers', 10 - correctAnswers)
+    localStorage.setItem('totalScore', newScoreTotal)
+    localStorage.setItem('correctTotal', newCorrectTotal)
+    localStorage.setItem('wrongTotal', newWrongTotal)
+
+    // Check for bestScore      
+    if (score > bestScore) localStorage.setItem('bestScore', score)
+    
+    // Check for worstScore
+    if (worstScore == 0) localStorage.setItem('worstScore', score)
+    else if (score < worstScore) localStorage.setItem('worstScore', score)
+  }
+
   const updateAndRedirect = () => {
     // Update localStorage w/ new score
     localStorage.setItem('score', score)
@@ -100,15 +132,7 @@ function Question() {
     localStorage.setItem('correctAnswers', correctAnswers)
     // Redirect
     if (counter > 3){
-      // Update localStorage
-      localStorage.setItem('correctAnswers', correctAnswers)
-      localStorage.setItem('wrongAnswers', 10 - correctAnswers)
-      let totalScore = localStorage.getItem('totalScore')
-      let newTotal = Number(totalScore) + score
-      localStorage.setItem('totalScore', newTotal)
-      (score > localStorage.getItem('bestScore') ? localStorage.setItem('bestScore', score) : null)
-      (localStorage.getItem('worstScore') === 0 ? localStorage.setItem('worstScore', score) : null)
-      (score < localStorage.getItem('worstScore') ? localStorage.setItem('worstScore', score) : null)
+      updateLocalStorage()
 
       // Navigate to endGame component
       return navigate('/endgame', true)

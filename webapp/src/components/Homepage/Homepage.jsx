@@ -44,8 +44,10 @@ function Homepage() {
   useEffect(() => {
     if (localStorage.getItem('playerName')) {
       setPlayerName(localStorage.getItem('playerName'))
+      console.log('did mount')
     } else {
       setPlayerName('PLAYER')
+      console.log('did mount')
     }
 
     if (!localStorage.getItem('totalPlayed')) {

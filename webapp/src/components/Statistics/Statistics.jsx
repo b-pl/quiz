@@ -16,7 +16,7 @@ function Statistics() {
     <div>
       <div className='statistics_wrapper'>
         <div className='header'>
-          <p className='heading'>{player}</p>
+          <p className='heading'>{player}'s</p>
           <p className='heading'>Statistics</p>
 
           <hr className='separator' />
