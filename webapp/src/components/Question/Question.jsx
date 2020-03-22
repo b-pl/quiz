@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { navigate } from 'hookrouter'
 import Button from '../Button/Button'
 import './Question.css'
@@ -28,6 +28,7 @@ function Question() {
   const [score, setScore] = useState(0)
   const [multiplier, setMultiplier] = useState(1)
   const [correctAnswers, setCorrectAnswers] = useState(0)
+  const [time, setTime] = useState(0)
   const CORRECT_ANSWER_POINTS = 5000
   let timeBonus
   let stopwatch
@@ -90,7 +91,51 @@ function Question() {
     timeBonus = 10000
 
     // timeBonus -= 1 every 1ms
-    stopwatch = setInterval(() => {timeBonus -= 1; }, 1)
+    stopwatch = setInterval(() => { timeBonus -= 1 }, 1)
+  }
+
+  const updateLocalStorage = () => {
+    // Get totalScore and add current score
+    let totalScore = localStorage.getItem('totalScore')
+    let newScoreTotal = Number(totalScore) + score
+
+    // Get bestScore & worstScore
+    let bestScore = localStorage.getItem('bestScore')
+    let worstScore = localStorage.getItem('worstScore')
+
+    // Get total of correct answers
+    let correctTotal = localStorage.getItem('correctTotal')
+    let newCorrectTotal = Number(correctTotal) + correctAnswers
+
+    // Get total of wrong answers
+    let wrongTotal = localStorage.getItem('wrongTotal')
+    let newWrongTotal = Number(wrongTotal) + (10 - correctAnswers)
+
+    // Get bestTime & worstTime
+    let bestTime = localStorage.getItem('bestTime')
+    let worstTime = localStorage.getItem('worstTime')
+
+    // Actually update stats
+    localStorage.setItem('correctAnswers', correctAnswers)
+    localStorage.setItem('wrongAnswers', 10 - correctAnswers)
+    localStorage.setItem('totalScore', newScoreTotal)
+    localStorage.setItem('correctTotal', newCorrectTotal)
+    localStorage.setItem('wrongTotal', newWrongTotal)
+    localStorage.setItem('time', time)
+
+    // Check for bestScore      
+    if (score > bestScore) localStorage.setItem('bestScore', score)
+    
+    // Check for worstScore
+    if (worstScore == 0) localStorage.setItem('worstScore', score)
+    else if (score < worstScore) localStorage.setItem('worstScore', score)
+
+    // Check for bestTime
+    if (bestTime == 0) localStorage.setItem('bestTime', time)
+    else if (time < bestTime) localStorage.setItem('bestTime', time)
+
+    // Check for worstTime
+    if(time > worstTime) localStorage.setItem('worstTime', time)
   }
 
   const updateAndRedirect = () => {
@@ -99,12 +144,27 @@ function Question() {
     // Update localStorage w/ number of correct answers
     localStorage.setItem('correctAnswers', correctAnswers)
     // Redirect
-    if (counter > 3) return navigate('/endgame', true)
+    if (counter > 3){ 
+      updateLocalStorage()
+
+      // Navigate to endGame component
+      return navigate('/endgame', true)
+    }
   }
+
+  // ComponentDidMount
+  useEffect(() => {
+    let totalPlayed = localStorage.getItem('totalPlayed')
+    localStorage.setItem('totalPlayed', ++totalPlayed)
+
+    const timerr = setInterval(() => { setTime(prevTime => prevTime + 1) }, 1000)
+    return () => clearInterval(timerr)
+  }, [])
 
   return(
     <div>
       <div className='question_wrapper'>
+        
         <Topbar score={score} question={counter + 1} />
         {/* If there's no questions left navigate to endGame
         Otherwise increment counter to display next question */}

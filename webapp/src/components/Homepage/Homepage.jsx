@@ -47,6 +47,17 @@ function Homepage() {
     } else {
       setPlayerName('PLAYER')
     }
+
+    if (!localStorage.getItem('totalPlayed')) {
+      localStorage.setItem('totalPlayed', 0)
+      localStorage.setItem('correctTotal', 0)
+      localStorage.setItem('wrongTotal', 0)
+      localStorage.setItem('totalScore', 0)
+      localStorage.setItem('bestScore', 0)
+      localStorage.setItem('worstScore', 0)
+      localStorage.setItem('bestTime', 0)
+      localStorage.setItem('worstTime', 0)
+    }
   }, [])
 
   return(
