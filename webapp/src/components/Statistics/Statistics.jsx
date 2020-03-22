@@ -11,6 +11,8 @@ function Statistics() {
   let totalScore = localStorage.getItem('totalScore')
   let bestScore = localStorage.getItem('bestScore')
   let worstScore = localStorage.getItem('worstScore')
+  let bestTime = localStorage.getItem('bestTime')
+  let worstTime = localStorage.getItem('worstTime')
 
   return (
     <div>
@@ -28,6 +30,8 @@ function Statistics() {
           <p>Total score: {totalScore}</p>
           <p>Best score: {bestScore}</p>
           <p>Worst score: {worstScore}</p>
+          <p>Best time: {bestTime}</p>
+          <p>Worst time: {worstTime}</p>
         </div>
         <div className='button'>
           <A href='/'>

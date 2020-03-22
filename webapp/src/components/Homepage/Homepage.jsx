@@ -44,10 +44,8 @@ function Homepage() {
   useEffect(() => {
     if (localStorage.getItem('playerName')) {
       setPlayerName(localStorage.getItem('playerName'))
-      console.log('did mount')
     } else {
       setPlayerName('PLAYER')
-      console.log('did mount')
     }
 
     if (!localStorage.getItem('totalPlayed')) {
@@ -57,6 +55,8 @@ function Homepage() {
       localStorage.setItem('totalScore', 0)
       localStorage.setItem('bestScore', 0)
       localStorage.setItem('worstScore', 0)
+      localStorage.setItem('bestTime', 0)
+      localStorage.setItem('worstTime', 0)
     }
   }, [])
 
