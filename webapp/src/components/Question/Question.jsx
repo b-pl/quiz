@@ -3,6 +3,7 @@ import { navigate } from 'hookrouter'
 import Button from '../Button/Button'
 import './Question.css'
 import Topbar from '../Topbar/Topbar'
+import host from '../../core/config'
 
 function Question() {
   const [qArray] = useState([
@@ -138,6 +139,24 @@ function Question() {
     if(time > worstTime) localStorage.setItem('worstTime', time)
   }
 
+  const sendScoreToDatabase = () => {
+    const data = {
+      playerName: localStorage.getItem('playerName'),
+      score: localStorage.getItem('score'),
+      time: localStorage.getItem('time')
+    }
+
+    fetch(`${host}/sendScore`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(console.log('lolz'))
+
+  }
+
   const updateAndRedirect = () => {
     // Update localStorage w/ new score
     localStorage.setItem('score', score)
@@ -146,6 +165,7 @@ function Question() {
     // Redirect
     if (counter > 3){ 
       updateLocalStorage()
+      sendScoreToDatabase()
 
       // Navigate to endGame component
       return navigate('/endgame', true)

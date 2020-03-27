@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap');
+
+:root {
+  font-family: 'Roboto Slab', serif;
+}
+
+.highscores_wrapper {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  flex-direction: column;
+  width: 320px;
+  height: 654px;
+  border: 1px solid #000;
+  background: #364860;
+}
+
+.header {
+  font-size: 40pt;
+  color: #FFF;
+  display: inline-block;
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  width: 280px;
+  /* border: 1px solid #000; */
+  font-size: 16pt;
+  color: #fff;
+}
+
+.column_1 {
+  width: 20px;
+}
+
+.column_2 {
+  
+}
+
+.column_3 {
+  
+}
+
+.column_4 {
+  
+}
