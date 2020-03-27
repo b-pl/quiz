@@ -12,7 +12,6 @@ const app = {
 function init() {
   const server = Hapi.server({
     port: 3001,
-    host: 'localhost',
     routes: {
       cors: {
         origin: ['*'],
@@ -33,11 +32,29 @@ function init() {
   })
 
   server.route({
+    method: 'POST',
+    path: '/sendScore',
+    handler: async (request, h) => {
+      const json = request.payload
+      const data = await conn('highscores').insert(json)
+      return data
+    }
+  })
+
+  server.route({
     method: 'GET',
     path: '/highscores',
     handler: (request, h) => {
       const highscores = conn.select().table('highscores').orderBy('score', 'desc')
       return highscores
+    }
+  });
+
+  server.route({
+    method: 'GET',
+    path: '/test',
+    handler: (request, h) => {
+      return 'Hello world'
     }
   });
 
