@@ -14,6 +14,7 @@ const routes = {
   '/statistics': () => <Statistics />,
   '/categories': () => <Categories />,
   '/question': () => <Question />,
+  '/question/:category': ({ category }) => <Question category={ category } />,
   '/answer': () => <Answer />,
   '/endgame': () => <Endgame />,
   '/topbar': () => <Topbar />

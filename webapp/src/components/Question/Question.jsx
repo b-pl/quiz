@@ -5,7 +5,25 @@ import './Question.css'
 import Topbar from '../Topbar/Topbar'
 import host from '../../core/config'
 
-function Question() {
+function Question(props) {
+  const [allQuestions, setAllQuestions] = useState()
+
+  useEffect(() => {
+    fetch(`${host}/question/${props.category}`, {
+      accept: 'application/json',
+    })
+      .then(res => res.json())
+      .then(res => setAllQuestions(res))
+      .then(res => console.log(allQuestions))
+
+    console.log('AllQuestions = ' + allQuestions)
+    let totalPlayed = localStorage.getItem('totalPlayed')
+    localStorage.setItem('totalPlayed', ++totalPlayed)
+
+    const timerr = setInterval(() => { setTime(prevTime => prevTime + 1) }, 1000)
+    return () => clearInterval(timerr)
+  }, [])
+
   const [qArray] = useState([
     {
       question: 'Question 1',
@@ -153,8 +171,6 @@ function Question() {
       },
       body: JSON.stringify(data)
     })
-    .then(console.log('lolz'))
-
   }
 
   const updateAndRedirect = () => {
@@ -173,13 +189,15 @@ function Question() {
   }
 
   // ComponentDidMount
-  useEffect(() => {
-    let totalPlayed = localStorage.getItem('totalPlayed')
-    localStorage.setItem('totalPlayed', ++totalPlayed)
+  // useEffect(() => {
+  //   console.log('category FRONT = ' + props.category)
+  //   console.log('AllQuestions = ' + allQuestions)
+  //   let totalPlayed = localStorage.getItem('totalPlayed')
+  //   localStorage.setItem('totalPlayed', ++totalPlayed)
 
-    const timerr = setInterval(() => { setTime(prevTime => prevTime + 1) }, 1000)
-    return () => clearInterval(timerr)
-  }, [])
+  //   const timerr = setInterval(() => { setTime(prevTime => prevTime + 1) }, 1000)
+  //   return () => clearInterval(timerr)
+  // }, [])
 
   return(
     <div>

@@ -17,7 +17,11 @@ function init() {
         origin: ['*'],
         headers: ['Authorization']
       }
+    },
+    debug: {
+      request: ['error']
     }
+    // !!! REMEMBER TO DELETE
   })
 
   const conn = knex({
@@ -37,6 +41,7 @@ function init() {
     handler: async (request, h) => {
       const json = request.payload
       const data = await conn('highscores').insert(json)
+
       return data
     }
   })
@@ -46,15 +51,29 @@ function init() {
     path: '/highscores',
     handler: (request, h) => {
       const highscores = conn.select().table('highscores').orderBy('score', 'desc')
+
       return highscores
     }
   });
 
   server.route({
     method: 'GET',
-    path: '/test',
+    path: '/question/{category}',
     handler: (request, h) => {
-      return 'Hello world'
+      const cat = encodeURIComponent(request.params.category)
+      const questions = conn.select().table('questions').where('category', cat)
+
+      return questions
+    }
+  });
+
+  server.route({
+    method: 'GET',
+    path: '/question',
+    handler: (request, h) => {
+      const questions = conn.select().table('questions').where('category', 'Movies')
+
+      return questions
     }
   });
 
