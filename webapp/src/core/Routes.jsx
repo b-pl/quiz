@@ -7,6 +7,7 @@ import Question from '../components/Question/Question'
 import Answer from '../components/Answer/Answer'
 import Endgame from '../components/Endgame/Endgame'
 import Topbar from '../components/Topbar/Topbar'
+import AreYouReady from '../components/AreYouReady/AreYouReady'
 
 const routes = {
   '/': () => <Homepage />,
@@ -14,9 +15,12 @@ const routes = {
   '/statistics': () => <Statistics />,
   '/categories': () => <Categories />,
   '/question': () => <Question />,
+  '/question/:category': ({ category }) => <Question category={ category } />,
   '/answer': () => <Answer />,
   '/endgame': () => <Endgame />,
-  '/topbar': () => <Topbar />
+  '/topbar': () => <Topbar />,
+  '/areyouready': () => <AreYouReady />,
+  '/areyouready/:category': ({ category }) => <AreYouReady category={ category } />
 }
 
 export default routes

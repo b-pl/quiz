@@ -1,38 +1,54 @@
+// CORE IMPORTS
 import React, { useState, useEffect } from 'react'
-import { navigate } from 'hookrouter'
-import Button from '../Button/Button'
-import './Question.css'
-import Topbar from '../Topbar/Topbar'
 import host from '../../core/config'
+import { navigate } from 'hookrouter'
+// CSS IMPORTS
+import './Question.css'
+// COMPONENTS IMPORTS
+import Button from '../Button/Button'
+import Topbar from '../Topbar/Topbar'
+import Clock from '../Clock/Clock'
 
-function Question() {
-  const [qArray] = useState([
-    {
-      question: 'Question 1',
-      answers: [['Wrong1'], ['Wrong2'], ['Correct', 1], ['Wrong3']]
-    },
-    {
-      question: 'Question 2',
-      answers: [['Wrong1'], ['Wrong2'], ['Wrong3'], ['Correct', 1]]
-    },
-    {
-      question: 'Question 3',
-      answers: [['Correct', 1], ['Wrong2'], ['Wrong3'], ['Wrong1']]
-    },
-    {
-      question: 'Question 4',
-      answers: [['Wrong2'], ['Correct', 1], ['Wrong3'], ['Wrong1']]
-    },
-    '1'
-  ])
+function Question(props) {
+  // * VARIABLES
+  // Array for fetched questions
+  const [fetchedQuestions, setFetchedQuestions] = useState()
+  // Array to map fetchedQuesetions
+  let questions = []
+  // Helping counter; Iterates through arrays
   const [counter, setCounter] = useState(0)
+  // Present user score
   const [score, setScore] = useState(0)
+  // Score multiplier
   const [multiplier, setMultiplier] = useState(1)
+  // Number of correct answers in present game
   const [correctAnswers, setCorrectAnswers] = useState(0)
-  const [time, setTime] = useState(0)
+  // Points for correct answer
   const CORRECT_ANSWER_POINTS = 5000
+  // Bonus points for quick answer
   let timeBonus
+  // Stopwatch for calculating timeBonus
   let stopwatch
+  // * VARIABLES
+
+  // Fetch questions from database
+  useEffect(() => {
+    fetch(`${host}/question/${props.category}`, {
+      accept: 'application/json',
+    })
+      .then(res => res.json())
+      .then(res => setFetchedQuestions(res))
+  }, [])
+
+  // Convert to desired structure
+  const mapFetchedQuestions = () => {
+    fetchedQuestions && fetchedQuestions.map((q) => {
+      questions.push({
+        question: q.question,
+        answers: [[q.answer_1, 1], [q.answer_2], [q.answer_3], [q.answer_4]]
+      })
+    })
+  }
 
   const updateScore = (target, correctAnswer) => {
     // If player gave wrong answer set multiplier to 1 
@@ -58,7 +74,7 @@ function Question() {
   const handleClick = (e) => {
     const target = e.currentTarget.id
     
-    if (qArray[counter].answers[target][1] != null) updateScore(target, true)
+    if (questions[counter].answers[target][1] != null) updateScore(target, true)
     else updateScore(target, false)
 
     // Clear interval
@@ -68,24 +84,9 @@ function Question() {
     setCounter(prevCounter => prevCounter + 1)
   }
 
-  const displayAnswers = () => {
-    if (counter > 3) return true
-    countdown()
-    // Push answers for current question to an array
-    let arr = []
-    for (let i = 0; i < 4; i++) {
-      arr.push(qArray[counter].answers[i][0])
-    }
-    
-    // Map arr to put answers into buttons labels
-    return arr && arr.map(x => (
-      <Button key={arr.indexOf(x)}
-              id={arr.indexOf(x)}
-              label={x}
-              styling='menuButton'
-              onClick={handleClick}
-              icon='none' />
-    ))
+  const displayQuestion = () => {
+    if (questions.length === 0 || counter > 9) return null
+    else return questions[counter].question
   }
 
   const countdown = () => {
@@ -93,6 +94,34 @@ function Question() {
 
     // timeBonus -= 1 every 1ms
     stopwatch = setInterval(() => { timeBonus -= 1 }, 1)
+  }
+
+  const displayAnswers = () => {
+    // * The fuck was this doing?
+    // if (counter > 3) return true
+
+    // Start countdown to compute timeBonus
+    countdown()
+
+    // Push answers for current question to an array
+    let arr = []
+    if (questions.length === 0 || counter > 9) {
+      return null
+    } else {
+      for (let i = 0; i < 4; i++) {
+        arr.push(questions[counter].answers[i][0])
+      }
+    }
+
+    // Map arr to put answers into buttons labels
+    return arr && arr.map(x => (
+      <Button key={arr.indexOf(x)}
+        id={arr.indexOf(x)}
+        label={x}
+        styling='menuButton'
+        onClick={handleClick}
+        icon='none' />
+    ))
   }
 
   const updateLocalStorage = () => {
@@ -122,7 +151,8 @@ function Question() {
     localStorage.setItem('totalScore', newScoreTotal)
     localStorage.setItem('correctTotal', newCorrectTotal)
     localStorage.setItem('wrongTotal', newWrongTotal)
-    localStorage.setItem('time', time)
+    let totalPlayed = localStorage.getItem('totalPlayed')
+    localStorage.setItem('totalPlayed', ++totalPlayed)
 
     // Check for bestScore      
     if (score > bestScore) localStorage.setItem('bestScore', score)
@@ -130,6 +160,9 @@ function Question() {
     // Check for worstScore
     if (worstScore == 0) localStorage.setItem('worstScore', score)
     else if (score < worstScore) localStorage.setItem('worstScore', score)
+
+    // Get time from localStorage
+    let time = localStorage.getItem('time')
 
     // Check for bestTime
     if (bestTime == 0) localStorage.setItem('bestTime', time)
@@ -153,8 +186,6 @@ function Question() {
       },
       body: JSON.stringify(data)
     })
-    .then(console.log('lolz'))
-
   }
 
   const updateAndRedirect = () => {
@@ -163,7 +194,7 @@ function Question() {
     // Update localStorage w/ number of correct answers
     localStorage.setItem('correctAnswers', correctAnswers)
     // Redirect
-    if (counter > 3){ 
+    if (counter > 9){ 
       updateLocalStorage()
       sendScoreToDatabase()
 
@@ -172,27 +203,20 @@ function Question() {
     }
   }
 
-  // ComponentDidMount
-  useEffect(() => {
-    let totalPlayed = localStorage.getItem('totalPlayed')
-    localStorage.setItem('totalPlayed', ++totalPlayed)
-
-    const timerr = setInterval(() => { setTime(prevTime => prevTime + 1) }, 1000)
-    return () => clearInterval(timerr)
-  }, [])
-
-  return(
+  return (
     <div>
+      <Clock />
       <div className='question_wrapper'>
-        
         <Topbar score={score} question={counter + 1} />
+        
         {/* If there's no questions left navigate to endGame
         Otherwise increment counter to display next question */}
         {updateAndRedirect()}
 
         <div className='header'>
           {/* Display question */}
-          {qArray[counter].question}
+          {mapFetchedQuestions()}
+          {displayQuestion()}
 
           <hr className='separator' />
         </div>
