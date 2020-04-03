@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { A } from 'hookrouter'
+import '../../css/RootStylesheet.css'
 import './Highscores.css'
 import host from '../../core/config'
 import Button from '../Button/Button'
@@ -29,7 +30,7 @@ function Highscores() {
   return (
     <div>
       {/* {test()} */}
-      <div className='highscores_wrapper'>
+      <div className='wrapper'>
         <div className='header'>
           Highscores
 

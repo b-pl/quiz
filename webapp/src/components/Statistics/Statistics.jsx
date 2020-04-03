@@ -1,5 +1,6 @@
 import React from 'react'
 import { A } from 'hookrouter'
+import '../../css/RootStylesheet.css'
 import './Statistics.css'
 import Button from '../Button/Button'
 
@@ -16,7 +17,7 @@ function Statistics() {
 
   return (
     <div>
-      <div className='statistics_wrapper'>
+      <div className='wrapper'>
         <div className='header'>
           <p className='heading'>{player}'s</p>
           <p className='heading'>Statistics</p>

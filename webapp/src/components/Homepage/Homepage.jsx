@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { A } from 'hookrouter'
 import Button from '../Button/Button'
 // import Topbar from '../Topbar/Topbar'
+import '../../css/RootStylesheet.css'
 import './Homepage.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faTrophy, faChartLine } from '@fortawesome/free-solid-svg-icons'
@@ -62,7 +63,7 @@ function Homepage() {
 
   return(
     <div>
-      <div className='homepage_wrapper'>
+      <div className='wrapper'>
         {/* Header message */}
         <div className='header'>
           Welcome

@@ -1,7 +1,7 @@
 import React from 'react'
 import { A } from 'hookrouter'
 import Button from '../Button/Button'
-import './Categories.css'
+import '../../css/RootStylesheet.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilm, faGamepad, faMusic } from '@fortawesome/free-solid-svg-icons'
 import { faGrinSquintTears, faQuestion, faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons'
@@ -17,7 +17,7 @@ const questionMark = <FontAwesomeIcon icon={faQuestion} />
 function Categories() {
   return(
     <div>
-      <div className='categories_wrapper'>
+      <div className='wrapper'>
         <div className='header'>
           Choose category
   
