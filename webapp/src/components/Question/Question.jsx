@@ -29,25 +29,55 @@ function Question(props) {
   let timeBonus
   // Stopwatch for calculating timeBonus
   let stopwatch
+  // Array for shuffling questions
+  const [range, setRange] = useState()
+  // let helperArray = []
   // * VARIABLES
 
   // Fetch questions from database
+  // ComponentDidMount
   useEffect(() => {
     fetch(`${host}/question/${props.category}`, {
       accept: 'application/json',
     })
       .then(res => res.json())
       .then(res => setFetchedQuestions(res))
+
+    generateNumbers()
+    // Set range[] to undefined on unmount
+    return (() => { setRange(undefined) })
   }, [])
+
+  const generateNumbers = () => {
+    let helperArray = []
+    // Save numbers in range into array
+    for (let i = 0; i < 44; i++) {
+      helperArray.push(i)
+    }
+
+    // Shuffle them
+    helperArray.sort(() => Math.random() - 0.5)
+
+    // Get 10 of them
+    helperArray.splice(10, helperArray.length - 10)
+
+    setRange(helperArray)
+  }
 
   // Convert to desired structure
   const mapFetchedQuestions = () => {
-    fetchedQuestions && fetchedQuestions.map((q) => {
-      questions.push({
-        question: q.question,
-        answers: [[q.answer_1, 1], [q.answer_2], [q.answer_3], [q.answer_4]]
-      })
-    })
+    if (fetchedQuestions === undefined) {
+      return null
+    } else {
+      for (let i = 0; i < 10; i++) {
+        questions.push({
+          question: fetchedQuestions[range[i]].question,
+          answers: [[fetchedQuestions[range[i]].answer_1, 1], [fetchedQuestions[range[i]].answer_2], [fetchedQuestions[range[i]].answer_3], [fetchedQuestions[range[i]].answer_4]]
+        })
+        // Sort answers alphabetically so correct answer won't be always 1st
+        questions[i].answers.sort()
+      }
+    }
   }
 
   const updateScore = (target, correctAnswer) => {
@@ -97,9 +127,6 @@ function Question(props) {
   }
 
   const displayAnswers = () => {
-    // * The fuck was this doing?
-    // if (counter > 3) return true
-
     // Start countdown to compute timeBonus
     countdown()
 
@@ -158,14 +185,14 @@ function Question(props) {
     if (score > bestScore) localStorage.setItem('bestScore', score)
     
     // Check for worstScore
-    if (worstScore == 0) localStorage.setItem('worstScore', score)
+    if (worstScore === '0') localStorage.setItem('worstScore', score)
     else if (score < worstScore) localStorage.setItem('worstScore', score)
 
     // Get time from localStorage
     let time = localStorage.getItem('time')
 
     // Check for bestTime
-    if (bestTime == 0) localStorage.setItem('bestTime', time)
+    if (bestTime === '0') localStorage.setItem('bestTime', time)
     else if (time < bestTime) localStorage.setItem('bestTime', time)
 
     // Check for worstTime
@@ -205,6 +232,7 @@ function Question(props) {
 
   return (
     <div>
+      {/* Start clock */}
       <Clock />
       <div className='question_wrapper'>
         <Topbar score={score} question={counter + 1} />
@@ -215,6 +243,7 @@ function Question(props) {
 
         <div className='header'>
           {/* Display question */}
+          {/* {generateNumbers()} */}
           {mapFetchedQuestions()}
           {displayQuestion()}
 
