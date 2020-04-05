@@ -1,5 +1,6 @@
 import React from 'react'
 import { A } from 'hookrouter'
+import '../../css/RootStylesheet.css'
 import './Endgame.css'
 import Button from '../Button/Button'
 
@@ -10,7 +11,7 @@ function Endgame() {
 
   return(
     <div>
-      <div className='endgame_wrapper'>
+      <div className='wrapper'>
         <div className='header'>
           <span className='small-text'>Congratulations</span> <br />
           {player}

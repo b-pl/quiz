@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import host from '../../core/config'
 import { navigate } from 'hookrouter'
 // CSS IMPORTS
-import './Question.css'
+import '../../css/RootStylesheet.css'
 // COMPONENTS IMPORTS
 import Button from '../Button/Button'
 import Topbar from '../Topbar/Topbar'
@@ -31,7 +31,7 @@ function Question(props) {
   let stopwatch
   // Array for shuffling questions
   const [range, setRange] = useState()
-  // let helperArray = []
+  
   // * VARIABLES
 
   // Fetch questions from database
@@ -69,7 +69,7 @@ function Question(props) {
     if (fetchedQuestions === undefined) {
       return null
     } else {
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 10 ; i++) {
         questions.push({
           question: fetchedQuestions[range[i]].question,
           answers: [[fetchedQuestions[range[i]].answer_1, 1], [fetchedQuestions[range[i]].answer_2], [fetchedQuestions[range[i]].answer_3], [fetchedQuestions[range[i]].answer_4]]
@@ -116,7 +116,7 @@ function Question(props) {
 
   const displayQuestion = () => {
     if (questions.length === 0 || counter > 9) return null
-    else return questions[counter].question
+    else return questions[counter].question + '?'
   }
 
   const countdown = () => {
@@ -145,7 +145,7 @@ function Question(props) {
       <Button key={arr.indexOf(x)}
         id={arr.indexOf(x)}
         label={x}
-        styling='menuButton'
+        styling='menuButton menuButton-text--small'
         onClick={handleClick}
         icon='none' />
     ))
@@ -171,6 +171,7 @@ function Question(props) {
     // Get bestTime & worstTime
     let bestTime = localStorage.getItem('bestTime')
     let worstTime = localStorage.getItem('worstTime')
+    worstTime = Number(worstTime)
 
     // Actually update stats
     localStorage.setItem('correctAnswers', correctAnswers)
@@ -234,16 +235,15 @@ function Question(props) {
     <div>
       {/* Start clock */}
       <Clock />
-      <div className='question_wrapper'>
+      <div className='wrapper space-between'>
         <Topbar score={score} question={counter + 1} />
         
         {/* If there's no questions left navigate to endGame
         Otherwise increment counter to display next question */}
         {updateAndRedirect()}
 
-        <div className='header'>
+        <div className='header header-text--small'>
           {/* Display question */}
-          {/* {generateNumbers()} */}
           {mapFetchedQuestions()}
           {displayQuestion()}
 

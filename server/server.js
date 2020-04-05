@@ -17,11 +17,7 @@ function init() {
         origin: ['*'],
         headers: ['Authorization']
       }
-    },
-    debug: {
-      request: ['error']
     }
-    // !!! REMEMBER TO DELETE
   })
 
   const conn = knex({
@@ -50,7 +46,7 @@ function init() {
     method: 'GET',
     path: '/highscores',
     handler: (request, h) => {
-      const highscores = conn.select().table('highscores').orderBy('score', 'desc')
+      const highscores = conn.select().table('highscores').limit(10).orderBy('score', 'desc')
 
       return highscores
     }
@@ -62,16 +58,6 @@ function init() {
     handler: (request, h) => {
       const cat = encodeURIComponent(request.params.category)
       const questions = conn.select().table('questions').where('category', cat)
-
-      return questions
-    }
-  });
-
-  server.route({
-    method: 'GET',
-    path: '/question',
-    handler: (request, h) => {
-      const questions = conn.select().table('questions').where('category', 'Movies')
 
       return questions
     }

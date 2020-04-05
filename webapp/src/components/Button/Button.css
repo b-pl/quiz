@@ -83,3 +83,7 @@ button:active {
 .smaller .icon {
   font-size: 14pt;
 }
+
+.menuButton-text--small {
+  font-size: 16pt;
+}

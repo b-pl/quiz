@@ -1,36 +1,72 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap');
-
-:root {
-  font-family: 'Roboto Slab', serif;
-}
-
-.statistics_wrapper {
-  display: flex;
-  align-items: center;
-  margin: auto;
-  flex-direction: column;
-  width: 320px;
-  height: 654px;
-  border: 1px solid #000;
-  background: #364860;
-}
-
-.header {
-  font-size: 40pt;
-  color: #FFF;
-  display: inline-block;
-  text-align: center;
-}
-
 .heading {
   font-size: 24pt;
   margin: 0.2em;
 }
 
 .statsContent {
-  width: 260px;
-  text-align: left;
+  width: 280px;
   color: #FFF;
   font-size: 1.2em;
   margin: 0.2em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.statsContent-elem {
+  width: 260px;
+  height: 60px;
+  margin: 5px;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.statsContent-elem--small {
+  width: 124px;
+  height: 85px;
+  text-align: center;
+}
+
+.statsContent-elem-green {
+  margin: 5px;
+}
+
+.statsContent-elem-red {
+  margin: 5px;
+}
+
+.statsContent-elem--header {
+  font-size: 0.8em;
+  text-decoration: underline;
+}
+
+.statsContent-elem--stat {
+  font-size: 1.2em;
+}
+
+.statsContent-elem--small .statsContent-elem--header {
+  margin-bottom: 0.8em;
+}
+
+.statsContent-elem--small .statsContent-elem--stat {
+  font-size: 1.5em;
+}
+
+.statsContent-elem-green .statsContent-elem--stat {
+  color: #33A532;
+  font-weight: bold;
+}
+
+.statsContent-elem-red .statsContent-elem--stat {
+  color: #FF4500;
+  font-weight: bold;
+}
+
+.statsContent-elem--top {
+  margin-top: 2em;
+}
+
+.separator-stats {
+  margin: 0;
 }

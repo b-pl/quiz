@@ -1,45 +1,15 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap');
-
-:root {
-  font-family: 'Roboto Slab', serif;
-}
-
-.homepage_wrapper {
-  display: flex;
-  align-items: center;
-  margin: auto;
-  flex-direction: column;
-  width: 320px;
-  height: 654px;
-  border: 1px solid #000;
-  background: #364860;
-  justify-content: center;
-}
-
 .playerName {
   margin: auto;
   display: block;
   font-size: 26pt;
-  border: 0;
-  background: #364860;
-  width: 90%;
+  border: none;
+  border-radius: 10px;
+  background: rgb(68, 90, 120, .5);
+  width: 80%;
   text-align: center;
   color: #FFF;
 }
 
 .playerName:focus {
   outline: none;
-}
-
-.header {
-  font-size: 40pt;
-  color: #FFF;
-  display: inline-block;
-  text-align: center;
-}
-
-.separator {
-  display: block;
-  width: 280px;
-  color: #707070;
 }
