@@ -51,7 +51,7 @@ function Question(props) {
   const generateNumbers = () => {
     let helperArray = []
     // Save numbers in range into array
-    for (let i = 0; i < 44; i++) {
+    for (let i = 0; i < 49; i++) {
       helperArray.push(i)
     }
 

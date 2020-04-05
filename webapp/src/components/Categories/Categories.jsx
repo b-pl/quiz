@@ -28,9 +28,9 @@ function Categories() {
         <A href='/question/Games'>
           <Button label='Games' styling='categoryButton' icon={gamepadIcon} /></A>
         <A href='/categories'>
-          <Button label='Music' styling='categoryButton' icon={musicIcon} /></A>
+          <Button label='...' styling='categoryButton' icon={questionMark} /></A>
         <A href='/categories'>
-          <Button label='Memes' styling='categoryButton' icon={memesIcon} /></A>
+          <Button label='...' styling='categoryButton' icon={questionMark} /></A>
         <A href='/categories'>
           <Button label='...' styling='categoryButton' icon={questionMark} /></A>
         <A href='/categories'>

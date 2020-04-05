@@ -20,6 +20,7 @@ const statisticsIcon = <FontAwesomeIcon icon={faChartLine} />
 function Homepage() {
   // HOOKS
   const [playerName, setPlayerName] = useState('')
+  const [nameInput] = useState(React.createRef())
 
   const validatePlayerName = () => {
     const playerName = document.querySelector('.playerName').value
@@ -31,14 +32,15 @@ function Homepage() {
       alert('Name must contain 2-8 characters (only alphanumeric symbols)')
       return document.querySelector('#newGame').disabled = true
     }
+
   }
 
   const handleInputChange = (e) => {
     const target = e.target
     const value = target.value
 
-    setPlayerName(value)
-    localStorage.setItem('playerName', value)
+      setPlayerName(value)
+      localStorage.setItem('playerName', value)
   }
 
   // Component did mount...
@@ -67,7 +69,7 @@ function Homepage() {
         {/* Header message */}
         <div className='header'>
           Welcome
-          <input className='playerName' type='text' maxLength='8'
+          <input ref={nameInput} className='playerName' type='text' maxLength='8'
             onChange={handleInputChange} onBlur={validatePlayerName} value={playerName}/>
 
           <hr className='separator' />
