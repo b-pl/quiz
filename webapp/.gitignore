@@ -19,6 +19,7 @@
 .env.production.local
 ../pallete.pdf
 ../done.txt
+../.vscode
 
 npm-debug.log*
 yarn-debug.log*
