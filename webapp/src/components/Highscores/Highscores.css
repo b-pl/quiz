@@ -1,24 +1,29 @@
-.row {
+.highscores-content-row {
   display: flex;
   flex-direction: row;
   width: 280px;
-  /* border: 1px solid #000; */
-  font-size: 16pt;
+  font-size: 12pt;
   color: #fff;
+  text-align: center;
+}
+
+.highscores-content-row-headers {
+  border-bottom: 1px solid;
+  font-weight: bold;
 }
 
 .column_1 {
-  width: 20px;
+  width: 5%;
 }
 
 .column_2 {
-  
+  width: 40%;
 }
 
-.column_3 {
-  
+.column_3   {
+  width: 40%;
 }
 
 .column_4 {
-  
+  width: 15%;
 }

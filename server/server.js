@@ -46,7 +46,7 @@ function init() {
     method: 'GET',
     path: '/highscores',
     handler: (request, h) => {
-      const highscores = conn.select().table('highscores').orderBy('score', 'desc')
+      const highscores = conn.select().table('highscores').limit(10).orderBy('score', 'desc')
 
       return highscores
     }

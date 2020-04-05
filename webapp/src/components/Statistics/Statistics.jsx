@@ -22,17 +22,41 @@ function Statistics() {
           <p className='heading'>{player}'s</p>
           <p className='heading'>Statistics</p>
 
-          <hr className='separator' />
+          <hr className='separator-stats' />
         </div>
         <div className='statsContent'>
-          <p>Games played: {totalPlayed}</p>
-          <p>Correct answers total: {correctTotal}</p>
-          <p>Wrong answers total: {wrongTotal}</p>
-          <p>Total score: {totalScore}</p>
-          <p>Best score: {bestScore}</p>
-          <p>Worst score: {worstScore}</p>
-          <p>Best time: {bestTime}</p>
-          <p>Worst time: {worstTime}</p>
+          <div className='statsContent-elem statsContent-elem--top'>
+            <div className='statsContent-elem--header'>Games Played</div>
+            <div className='statsContent-elem--stat'>{totalPlayed}</div>
+          </div>
+          <div className='statsContent-elem'>
+            <div className='statsContent-elem--header'>Total Score</div>
+            <div className='statsContent-elem--stat'>{totalScore}</div>
+          </div>
+          <div className='statsContent-elem--small statsContent-elem-green'>
+            <div className='statsContent-elem--header'>Correct Answers</div>
+            <div className='statsContent-elem--stat'>{correctTotal}</div>
+          </div>
+          <div className='statsContent-elem--small statsContent-elem-red'>
+            <div className='statsContent-elem--header'>Wrong Answers</div>
+            <div className='statsContent-elem--stat'>{wrongTotal}</div>
+          </div>
+          <div className='statsContent-elem--small statsContent-elem-green'>
+            <div className='statsContent-elem--header'>Best Score</div>
+            <div className='statsContent-elem--stat'>{bestScore}</div>
+          </div>
+          <div className='statsContent-elem--small statsContent-elem-red'>
+            <div className='statsContent-elem--header'>Worst Score</div>
+            <div className='statsContent-elem--stat'>{worstScore}</div>
+          </div>
+          <div className='statsContent-elem--small statsContent-elem-green'>
+            <div className='statsContent-elem--header'>Best Time</div>
+            <div className='statsContent-elem--stat'>{bestTime}</div>
+          </div>
+          <div className='statsContent-elem--small statsContent-elem-red'>
+            <div className='statsContent-elem--header'>Worst Time</div>
+            <div className='statsContent-elem--stat'>{worstTime}</div>
+          </div>
         </div>
         <div className='button'>
           <A href='/'>

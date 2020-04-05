@@ -18,11 +18,11 @@ function Highscores() {
 
   const displayHighscores = () => {
     return highscores && highscores.map((highscore, index) => (
-      <div className='row'>
+      <div className='highscores-content-row'>
         <div className='column_1'>{index + 1}.</div>
         <div className='column_2'>{highscore.playerName}</div>
         <div className='column_3'>{highscore.score}</div>
-        <div className='column_4'>{highscore.time}</div>
+        <div className='column_4'>{highscore.time}s</div>
       </div>
     ))
   }
@@ -30,13 +30,25 @@ function Highscores() {
   return (
     <div>
       {/* {test()} */}
-      <div className='wrapper'>
+      <div className='wrapper space-around'>
         <div className='header'>
           Highscores
 
           <hr className='separator' />
         </div>
-        {displayHighscores()}
+        <div className='highscores-content'>
+          <div className='highscores-content-column--headers'>
+            <div className='highscores-content-row highscores-content-row-headers'>
+              <div className='column_1'>#</div>
+              <div className='column_2'>Name</div>
+              <div className='column_3'>Score</div>
+              <div className='column_4'>Time</div>
+            </div>
+          </div>
+          <div className='highscores-content-column--stats'>
+            {displayHighscores()}
+          </div>
+        </div>
 
         <div className='button'>
           <A href='/'>
