@@ -17,16 +17,20 @@ const statisticsIcon = <FontAwesomeIcon icon={faChartLine} />
 function Homepage() {
   // HOOKS
   const [playerName, setPlayerName] = useState('')
+  const [playerStats, setPlayerStats] = useState()
+
+  useEffect(() => {
+    setPlayerStats(playerName + 'stats')
+  }, [playerName])
 
   const validatePlayerName = () => {
     const playerName = document.querySelector('.playerName').value
 
-    if (playerName.length >= 2 && !(/\W/.test(playerName))) {
-      return document.querySelector('#newGame').disabled = false
-    } else {
+    if (playerName.length <= 2) {
       setTimeout(() => document.querySelector('.playerName').focus(), 1)
       alert('Name must contain 2-8 characters (only alphanumeric symbols)')
-      return document.querySelector('#newGame').disabled = true
+    } else {
+      if (!localStorage.getItem(playerStats)) setStatistics()
     }
   }
 
@@ -46,25 +50,27 @@ function Homepage() {
       setPlayerName(localStorage.getItem('playerName'))
     } else {
       setPlayerName('PLAYER')
-    }
-
-    // Set localStorage if there's no data
-    if (!localStorage.getItem('totalPlayed')) {
-      localStorage.setItem('totalPlayed', 0)
-      localStorage.setItem('correctTotal', 0)
-      localStorage.setItem('wrongTotal', 0)
-      localStorage.setItem('totalScore', 0)
-      localStorage.setItem('bestScore', 0)
-      localStorage.setItem('worstScore', 0)
-      localStorage.setItem('bestTime', 0)
-      localStorage.setItem('worstTime', 0)
-      localStorage.setItem('playerName', '')
+      localStorage.setItem('playerName', 'PLAYER')
     }
   }, [])
 
+  const setStatistics = () => {
+    let cleanStatistics = {
+      totalPlayed: 0,
+      correctTotal: 0,
+      wrongTotal: 0,
+      totalScore: 0,
+      bestScore: 0,
+      worstScore: 0,
+      bestTime: 0,
+      worstTime: 0,
+    }
+    localStorage.setItem(playerStats, JSON.stringify(cleanStatistics))
+  }
+
   // Force player to change name
   const validateGameStart = () => {
-    if (localStorage.getItem('playerName') === '') {
+    if (!localStorage.getItem('playerName') || localStorage.getItem('playerName') === 'PLAYER') {
       alert('Please change Player Name')
     } else {
       return navigate('/categories', true)

@@ -87,3 +87,8 @@ button:active {
 .menuButton-text--small {
   font-size: 16pt;
 }
+
+.clearButton {
+  width: 100px;
+  height: 30px;
+}
