@@ -1,7 +1,10 @@
+// CORE IMPORTS
 import React from 'react'
 import { A } from 'hookrouter'
+// CSS IMPORTS
 import '../../css/RootStylesheet.css'
 import './Statistics.css'
+// COMPONENTS IMPORTS
 import Button from '../Button/Button'
 
 function Statistics() {

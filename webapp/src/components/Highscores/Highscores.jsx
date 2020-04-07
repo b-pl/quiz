@@ -1,9 +1,13 @@
+// CORE IMPORTS
 import React, { useState, useEffect } from 'react'
 import { A } from 'hookrouter'
+// CSS IMPORTS
 import '../../css/RootStylesheet.css'
 import './Highscores.css'
-import host from '../../core/config'
+// COMPONENTS IMPORTS
 import Button from '../Button/Button'
+// OTHER IMPORTS
+import host from '../../core/config'
 
 function Highscores() {
   const [highscores, setHighscores] = useState()
@@ -18,7 +22,7 @@ function Highscores() {
 
   const displayHighscores = () => {
     return highscores && highscores.map((highscore, index) => (
-      <div className='highscores-content-row'>
+      <div key={index} className='highscores-content-row'>
         <div className='column_1'>{index + 1}.</div>
         <div className='column_2'>{highscore.playerName}</div>
         <div className='column_3'>{highscore.score}</div>
