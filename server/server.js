@@ -11,7 +11,7 @@ const app = {
 
 function init() {
   const server = Hapi.server({
-    port: 3001,
+    port: process.env.APP_PORT,
     routes: {
       cors: {
         origin: ['*'],
@@ -19,6 +19,8 @@ function init() {
       }
     }
   })
+
+  server.realm.modifiers.route.prefix = '/api'
 
   const conn = knex({
     client: 'mysql',
