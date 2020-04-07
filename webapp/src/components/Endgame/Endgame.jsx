@@ -1,7 +1,10 @@
+// CORE IMPORTS
 import React from 'react'
 import { A } from 'hookrouter'
+// CSS IMPORTS
 import '../../css/RootStylesheet.css'
 import './Endgame.css'
+// COMPONENTS IMPORTS
 import Button from '../Button/Button'
 
 function Endgame() {

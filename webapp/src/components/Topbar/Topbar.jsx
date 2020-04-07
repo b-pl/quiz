@@ -1,4 +1,6 @@
+// CORE IMPORTS
 import React from 'react'
+// CSS IMPORTS
 import './Topbar.css'
 
 function Topbar(props) {

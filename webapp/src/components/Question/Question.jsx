@@ -31,7 +31,6 @@ function Question(props) {
   let stopwatch
   // Array for shuffling questions
   const [range, setRange] = useState()
-  
   // * VARIABLES
 
   // Fetch questions from database
@@ -104,6 +103,7 @@ function Question(props) {
   const handleClick = (e) => {
     const target = e.currentTarget.id
     
+    // Update state
     if (questions[counter].answers[target][1] != null) updateScore(target, true)
     else updateScore(target, false)
 
@@ -170,8 +170,11 @@ function Question(props) {
 
     // Get bestTime & worstTime
     let bestTime = localStorage.getItem('bestTime')
+    bestTime = Number(bestTime)
     let worstTime = localStorage.getItem('worstTime')
     worstTime = Number(worstTime)
+    let time = localStorage.getItem('time')
+    time = Number(time)
 
     // Actually update stats
     localStorage.setItem('correctAnswers', correctAnswers)
@@ -188,9 +191,6 @@ function Question(props) {
     // Check for worstScore
     if (worstScore === '0') localStorage.setItem('worstScore', score)
     else if (score < worstScore) localStorage.setItem('worstScore', score)
-
-    // Get time from localStorage
-    let time = localStorage.getItem('time')
 
     // Check for bestTime
     if (bestTime === '0') localStorage.setItem('bestTime', time)

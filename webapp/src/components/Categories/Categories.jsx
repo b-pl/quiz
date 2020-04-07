@@ -1,16 +1,17 @@
+// CORE IMPORTS
 import React from 'react'
 import { A } from 'hookrouter'
-import Button from '../Button/Button'
+// CSS IMPORTS
 import '../../css/RootStylesheet.css'
+// COMPONENTS IMPORTS
+import Button from '../Button/Button'
+// OTHER IMPORTS
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFilm, faGamepad, faMusic } from '@fortawesome/free-solid-svg-icons'
-import { faGrinSquintTears, faQuestion, faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons'
-
-// Icons for buttons
+import { faFilm, faGamepad } from '@fortawesome/free-solid-svg-icons'
+import { faQuestion, faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons'
+// VARIABLES
 const movieIcon = <FontAwesomeIcon icon={faFilm} />
 const gamepadIcon = <FontAwesomeIcon icon={faGamepad} />
-const musicIcon = <FontAwesomeIcon icon={faMusic} />
-const memesIcon = <FontAwesomeIcon icon={faGrinSquintTears} />
 const backIcon = <FontAwesomeIcon icon={faArrowAltCircleLeft} />
 const questionMark = <FontAwesomeIcon icon={faQuestion} />
 
