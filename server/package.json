@@ -2,16 +2,14 @@
   "name": "quiz-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "b-pl",
   "license": "ISC",
   "dependencies": {
-    "@hapi/hapi": "^19.1.1"
-  },
-  "devDependencies": {
+    "@hapi/hapi": "^19.1.1",
     "dotenv": "^8.2.0",
     "knex": "^0.20.13",
     "mysql": "^2.18.1"

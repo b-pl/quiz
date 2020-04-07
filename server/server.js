@@ -11,14 +11,13 @@ const app = {
 
 function init() {
   const server = Hapi.server({
-    port: 3001,
+    port: process.env.APP_PORT,
     routes: {
-      cors: {
-        origin: ['*'],
-        headers: ['Authorization']
-      }
+      cors: true
     }
   })
+
+  server.realm.modifiers.route.prefix = '/api'
 
   const conn = knex({
     client: 'mysql',
@@ -34,11 +33,14 @@ function init() {
   server.route({
     method: 'POST',
     path: '/sendScore',
-    handler: async (request, h) => {
-      const json = request.payload
-      const data = await conn('highscores').insert(json)
-
-      return data
+    options: {
+      cors: true,
+      handler: async (request, h) => {
+        const json = request.payload
+        const data = await conn('highscores').insert(json)
+  
+        return data
+      }
     }
   })
 
