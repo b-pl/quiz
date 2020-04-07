@@ -152,52 +152,35 @@ function Question(props) {
   }
 
   const updateLocalStorage = () => {
-    // Get totalScore and add current score
-    let totalScore = localStorage.getItem('totalScore')
-    let newScoreTotal = Number(totalScore) + score
-
-    // Get bestScore & worstScore
-    let bestScore = localStorage.getItem('bestScore')
-    let worstScore = localStorage.getItem('worstScore')
-
-    // Get total of correct answers
-    let correctTotal = localStorage.getItem('correctTotal')
-    let newCorrectTotal = Number(correctTotal) + correctAnswers
-
-    // Get total of wrong answers
-    let wrongTotal = localStorage.getItem('wrongTotal')
-    let newWrongTotal = Number(wrongTotal) + (10 - correctAnswers)
-
-    // Get bestTime & worstTime
-    let bestTime = localStorage.getItem('bestTime')
-    bestTime = Number(bestTime)
-    let worstTime = localStorage.getItem('worstTime')
-    worstTime = Number(worstTime)
+    // Get statistics
+    let player = localStorage.getItem('playerName') + 'stats'
+    let playerStatistics = JSON.parse(localStorage.getItem(player))
     let time = localStorage.getItem('time')
-    time = Number(time)
 
-    // Actually update stats
-    localStorage.setItem('correctAnswers', correctAnswers)
-    localStorage.setItem('wrongAnswers', 10 - correctAnswers)
-    localStorage.setItem('totalScore', newScoreTotal)
-    localStorage.setItem('correctTotal', newCorrectTotal)
-    localStorage.setItem('wrongTotal', newWrongTotal)
-    let totalPlayed = localStorage.getItem('totalPlayed')
-    localStorage.setItem('totalPlayed', ++totalPlayed)
+    // Update Statistics
+    playerStatistics.correctAnswers = correctAnswers
+    playerStatistics.wrongAnswers = 10 - correctAnswers
+    playerStatistics.totalScore += score
+    playerStatistics.correctTotal += correctAnswers
+    playerStatistics.wrongTotal += (10 - correctAnswers)
+    playerStatistics.totalPlayed++
 
-    // Check for bestScore      
-    if (score > bestScore) localStorage.setItem('bestScore', score)
-    
+    // Check for bestScore
+    if (score > playerStatistics.bestScore) playerStatistics.bestScore = score
+
     // Check for worstScore
-    if (worstScore === '0') localStorage.setItem('worstScore', score)
-    else if (score < worstScore) localStorage.setItem('worstScore', score)
+    if (playerStatistics.worstScore === 0) playerStatistics.worstScore = score
+    else if (score < playerStatistics.worstScore) playerStatistics.worstScore = score
 
     // Check for bestTime
-    if (bestTime === '0') localStorage.setItem('bestTime', time)
-    else if (time < bestTime) localStorage.setItem('bestTime', time)
+    if (playerStatistics.bestTime === 0) playerStatistics.bestTime = time
+    else if (time < playerStatistics.bestTime) playerStatistics.bestTime = time
 
     // Check for worstTime
-    if(time > worstTime) localStorage.setItem('worstTime', time)
+    if(time > playerStatistics.worstTime) playerStatistics.worstTime = time
+
+    // Send statistics to localStorage
+    localStorage.setItem(player, JSON.stringify(playerStatistics))
   }
 
   const sendScoreToDatabase = () => {

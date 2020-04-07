@@ -70,3 +70,7 @@
 .separator-stats {
   margin: 0;
 }
+
+.statsContent-elem--noheight {
+height: 30px;
+}
