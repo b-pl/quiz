@@ -36,7 +36,7 @@ function Question(props) {
   // Fetch questions from database
   // ComponentDidMount
   useEffect(() => {
-    fetch(`${host}/question/${props.category}`, {
+    fetch(`${host}/question/${props.category}/${props.lang}`, {
       accept: 'application/json',
     })
       .then(res => res.json())

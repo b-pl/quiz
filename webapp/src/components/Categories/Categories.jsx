@@ -1,5 +1,6 @@
 // CORE IMPORTS
 import React from 'react'
+import { useState } from 'react'
 import { A } from 'hookrouter'
 // CSS IMPORTS
 import '../../css/RootStylesheet.css'
@@ -16,6 +17,8 @@ const backIcon = <FontAwesomeIcon icon={faArrowAltCircleLeft} />
 const questionMark = <FontAwesomeIcon icon={faQuestion} />
 
 function Categories() {
+  const [lang] = useState(localStorage.getItem('lang'))
+
   return(
     <div>
       <div className='wrapper'>
@@ -24,9 +27,9 @@ function Categories() {
   
           <hr className='separator' />
         </div>
-        <A href='/question/Movies'>
+        <A href={'/question/Movies/' + lang}>
           <Button label='Movies' styling='categoryButton' icon={movieIcon} /></A>
-        <A href='/question/Games'>
+        <A href={'/question/Games/' + lang}>
           <Button label='Games' styling='categoryButton' icon={gamepadIcon} /></A>
         <A href='/categories'>
           <Button label='...' styling='categoryButton' icon={questionMark} /></A>

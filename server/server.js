@@ -56,10 +56,11 @@ function init() {
 
   server.route({
     method: 'GET',
-    path: '/question/{category}',
+    path: '/question/{category}/{lang}',
     handler: (request, h) => {
       const cat = encodeURIComponent(request.params.category)
-      const questions = conn.select().table('questions').where('category', cat)
+      const lang = encodeURIComponent(request.params.lang)
+      const questions = conn.select().table('questions').where('category', cat).andWhere('lang', lang)
 
       return questions
     }
