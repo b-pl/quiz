@@ -8,7 +8,7 @@ import './Statistics.css'
 import '../Button/Button.css'
 // COMPONENTS IMPORTS
 import Button from '../Button/Button'
-
+// TRANSLATION
 const translations = {
   pl: {
     statistics: 'Statystyki',

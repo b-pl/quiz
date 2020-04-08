@@ -12,7 +12,7 @@ function Clock(){
 
   return(
     <div>
-      {/* 'Shadow' component, it saves time to localStorage */}
+      {/* 'Shadow' component, it saves time variable to localStorage */}
     </div>
   )
 }
