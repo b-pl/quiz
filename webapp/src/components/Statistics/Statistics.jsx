@@ -1,7 +1,7 @@
 // CORE IMPORTS
 import React from 'react'
 import { A } from 'hookrouter'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 // CSS IMPORTS
 import '../../css/RootStylesheet.css'
 import './Statistics.css'
@@ -10,9 +10,9 @@ import '../Button/Button.css'
 import Button from '../Button/Button'
 
 function Statistics() {
-  const [player, setPlayer] = useState(localStorage.getItem('playerName') + 'stats')
+  const [player] = useState(localStorage.getItem('playerName') + 'stats')
   const [playerStatistics, setPlayerStatistics] = useState(JSON.parse(localStorage.getItem(player)))
-  const [playerName, setPlayerName] = useState(localStorage.getItem('playerName'))
+  const [playerName] = useState(localStorage.getItem('playerName'))
 
   const clearStatistics = () => {
     let player = localStorage.getItem('playerName') + 'stats'
