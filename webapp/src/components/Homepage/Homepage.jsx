@@ -23,9 +23,9 @@ function Homepage() {
     setPlayerStats(playerName + 'stats')
   }, [playerName])
 
-  // useEffect(() => {
-  //   localStorage.setItem('lang', 'en')
-  // })
+  useEffect(() => {
+    if(!localStorage.getItem('lang')) localStorage.setItem('lang', 'en')
+  }, [])
 
   const validatePlayerName = () => {
     const playerName = document.querySelector('.playerName').value
