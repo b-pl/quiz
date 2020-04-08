@@ -100,6 +100,14 @@ function Homepage() {
     }
   }
 
+  const validateGetStatistics = () => {
+    if (!localStorage.getItem('playerName') || localStorage.getItem('playerName') === 'PLAYER') {
+      alert('Please change Player Name to see statistics')
+    } else {
+      return navigate('/statistics', true)
+    }
+  }
+
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') document.querySelector('.playerName').blur()
   }
@@ -120,8 +128,7 @@ function Homepage() {
           <Button label={translation.play} styling='menuButton' id='newGame' icon={playIcon} onClick={validateGameStart} />
         <A href='/highscores'> 
           <Button label={translation.scores} styling='menuButton' icon={highscoresIcon} /></A>
-        <A href='/statistics'>
-           <Button label={translation.stats} styling='menuButton' icon={statisticsIcon} /></A>
+           <Button label={translation.stats} styling='menuButton' icon={statisticsIcon} onClick={validateGetStatistics} />
       </div>
     </div>
   )
