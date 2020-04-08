@@ -9,8 +9,24 @@ import Button from '../Button/Button'
 // OTHER IMPORTS
 import host from '../../core/config'
 
+const translations = {
+  pl: {
+    highscores: 'Wyniki',
+    name: 'Imię',
+    score: 'Wynik',
+    time: 'Czas'
+  },
+  en: {
+    highscores: 'Highscores',
+    name: 'Name',
+    score: 'Score',
+    time: 'Time'
+  }
+}
+
 function Highscores() {
   const [highscores, setHighscores] = useState()
+  const [translation, setTranslation] = useState({ ...translations.en })
 
   useEffect(() => {
     fetch(`${host}/highscores`, {
@@ -18,6 +34,12 @@ function Highscores() {
     })
       .then(res => res.json())
       .then(res => setHighscores(res))
+  }, [])
+
+  // Set set language
+  useEffect(() => {
+    if (localStorage.getItem('lang') === 'en') return setTranslation({ ...translations.en })
+    else return setTranslation({ ...translations.pl })
   }, [])
 
   const displayHighscores = () => {
@@ -36,7 +58,7 @@ function Highscores() {
       {/* {test()} */}
       <div className='wrapper space-around'>
         <div className='header'>
-          Highscores
+          {translation.highscores}
 
           <hr className='separator' />
         </div>
@@ -44,9 +66,9 @@ function Highscores() {
           <div className='highscores-content-column--headers'>
             <div className='highscores-content-row highscores-content-row-headers'>
               <div className='column_1'>#</div>
-              <div className='column_2'>Name</div>
-              <div className='column_3'>Score</div>
-              <div className='column_4'>Time</div>
+              <div className='column_2'>{translation.name}</div>
+              <div className='column_3'>{translation.score}</div>
+              <div className='column_4'>{translation.time}</div>
             </div>
           </div>
           <div className='highscores-content-column--stats'>
@@ -55,7 +77,7 @@ function Highscores() {
         </div>
 
         <div className='button'>
-          <A href='/'>
+          <A href='/home'>
             <Button label='Menu' styling='redButton' icon='none' /></A>
         </div>
       </div>

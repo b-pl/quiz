@@ -1,0 +1,8 @@
+.flag {
+  cursor: pointer;
+}
+
+.flag-png {
+  border: 1px solid rgb(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
