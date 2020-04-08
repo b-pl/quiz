@@ -13,18 +13,37 @@ import { faPlay, faTrophy, faChartLine } from '@fortawesome/free-solid-svg-icons
 const playIcon = <FontAwesomeIcon icon={faPlay} />
 const highscoresIcon = <FontAwesomeIcon icon={faTrophy} />
 const statisticsIcon = <FontAwesomeIcon icon={faChartLine} />
+// TRANSLATION
+const translations = {
+  pl: {
+    welcome: 'Witaj',
+    play: 'Graj',
+    scores: 'Wyniki',
+    stats: 'Statystyki'
+  },
+  en: {
+    welcome: 'Welcome',
+    play: 'Play',
+    scores: 'Scores',
+    stats: 'Stats'
+  }
+}
 
 function Homepage() {
   // HOOKS
   const [playerName, setPlayerName] = useState('')
   const [playerStats, setPlayerStats] = useState()
+  const [translation, setTranslation] = useState({ ...translations.en })
 
+  // Change this string every time, Player changes name
   useEffect(() => {
     setPlayerStats(playerName + 'stats')
   }, [playerName])
 
+  // Set set language
   useEffect(() => {
-    if(!localStorage.getItem('lang')) localStorage.setItem('lang', 'en')
+    if (localStorage.getItem('lang') === 'en') return setTranslation({ ...translations.en })
+    else return setTranslation({ ...translations.pl })
   }, [])
 
   const validatePlayerName = () => {
@@ -90,7 +109,7 @@ function Homepage() {
       <div className='wrapper'>
         {/* Header message */}
         <div className='header'>
-          Welcome
+          {translation.welcome}
           <input className='playerName' type='text' maxLength='8'
             onChange={handleInputChange} onKeyPress={handleKeyPress} onBlur={validatePlayerName} value={playerName}/>
 
@@ -98,11 +117,11 @@ function Homepage() {
         </div>
         
         {/* Buttons */}
-          <Button label='Play' styling='menuButton' id='newGame' icon={playIcon} onClick={validateGameStart} />
-        <A href='/highscores'>
-          <Button label='Scores' styling='menuButton' icon={highscoresIcon} /></A>
+          <Button label={translation.play} styling='menuButton' id='newGame' icon={playIcon} onClick={validateGameStart} />
+        <A href='/highscores'> 
+          <Button label={translation.scores} styling='menuButton' icon={highscoresIcon} /></A>
         <A href='/statistics'>
-          <Button label='Stats' styling='menuButton' icon={statisticsIcon} /></A>
+           <Button label={translation.stats} styling='menuButton' icon={statisticsIcon} /></A>
       </div>
     </div>
   )

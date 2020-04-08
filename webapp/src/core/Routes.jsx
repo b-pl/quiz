@@ -9,7 +9,8 @@ import Topbar from '../components/Topbar/Topbar'
 import Translation from '../components/Translation/Translation'
 
 const routes = {
-  '/': () => <Homepage />,
+  '/': () => <Translation />,
+  '/home': () => <Homepage />,
   '/highscores': () => <Highscores />,
   '/statistics': () => <Statistics />,
   '/categories': () => <Categories />,
@@ -18,7 +19,6 @@ const routes = {
   '/question/:category/:lang': ({ category, lang }) => <Question category={ category } lang={ lang } />,
   '/endgame': () => <Endgame />,
   '/topbar': () => <Topbar />,
-  '/translation': () => <Translation />
 }
 
 export default routes
