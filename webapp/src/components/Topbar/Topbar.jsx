@@ -7,7 +7,6 @@ import './Topbar.css'
 const translations = {
   pl: {
     score: 'Wynik',
-
   },
   en: {
     score: 'Score',

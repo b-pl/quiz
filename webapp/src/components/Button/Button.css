@@ -76,10 +76,6 @@ button:active {
   margin: 0;
 }
 
-.smaller .label {
-  width: 60px;
-}
-
 .smaller .icon {
   font-size: 14pt;
 }
